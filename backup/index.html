@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타자 연습 - 천지인 키보드</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 헤더 -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">타자 연습</h1>
+                <p class="subtitle">천지인 키보드로 한글을 연습해보세요</p>
+            </div>
+        </header>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 단어 표시 영역 -->
+            <div class="word-section">
+                <div class="word-display">
+                    <h2 id="current-word">아들</h2>
+                </div>
+                
+                <!-- 입력 필드 -->
+                <div class="input-section">
+                    <div class="input-container">
+                        <div class="input-field">
+                            <span id="input-text"></span>
+                            <span class="cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 힌트 영역 -->
+                <div class="hint-section">
+                    <div class="hint-container">
+                        <div class="hint-icon" id="hint-key">
+                            <div class="hint-symbol">ㅇ</div>
+                            <div class="hint-number">0</div>
+                        </div>
+                        <div class="hint-text">
+                            <span id="hint-text">1번 누르기</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 키보드 섹션 -->
+        <div class="keyboard-section">
+            <div class="keyboard-container">
+                <div class="keyboard">
+                    <!-- 첫 번째 줄 -->
+                    <div class="key-row">
+                        <div class="key" data-key="|" data-number="1">
+                            <span class="key-char">|</span>
+                            <span class="key-number">1</span>
+                        </div>
+                        <div class="key" data-key="." data-number="2">
+                            <span class="key-char">.</span>
+                            <span class="key-number">2</span>
+                        </div>
+                        <div class="key" data-key="-" data-number="3">
+                            <span class="key-char">-</span>
+                            <span class="key-number">3</span>
+                        </div>
+                        <div class="key backspace" data-action="backspace">
+                            <span class="key-char">←</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 두 번째 줄 -->
+                    <div class="key-row">
+                        <div class="key" data-key="ㄱ" data-number="4">
+                            <span class="key-char">ㄱㅋ</span>
+                            <span class="key-number">4</span>
+                        </div>
+                        <div class="key" data-key="ㄴ" data-number="5">
+                            <span class="key-char">ㄴㄹ</span>
+                            <span class="key-number">5</span>
+                        </div>
+                        <div class="key" data-key="ㄷ" data-number="6">
+                            <span class="key-char">ㄷㅌ</span>
+                            <span class="key-number">6</span>
+                        </div>
+                        <div class="key enter" data-action="enter">
+                            <span class="key-char">↵</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 세 번째 줄 -->
+                    <div class="key-row">
+                        <div class="key" data-key="ㅂ" data-number="7">
+                            <span class="key-char">ㅂㅍ</span>
+                            <span class="key-number">7</span>
+                        </div>
+                        <div class="key" data-key="ㅅ" data-number="8">
+                            <span class="key-char">ㅅㅎ</span>
+                            <span class="key-number">8</span>
+                        </div>
+                        <div class="key" data-key="ㅈ" data-number="9">
+                            <span class="key-char">ㅈㅊ</span>
+                            <span class="key-number">9</span>
+                        </div>
+                        <div class="key" data-key=",">
+                            <span class="key-char">,.?!</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 네 번째 줄 -->
+                    <div class="key-row">
+                        <div class="key" data-key="!">
+                            <span class="key-char">!#1</span>
+                        </div>
+                        <div class="key" data-key="ㅇ" data-number="0" id="target-key">
+                            <span class="key-char">ㅇㅁ</span>
+                            <span class="key-number">0</span>
+                        </div>
+                        <div class="key" data-key="kr">
+                            <!-- <span class="key-char">◄ KR ►</span> -->
+                            <span class="key-sub">[____]</span>
+                        </div>
+                        <div class="key" data-key=",">
+                            <span class="key-char">,</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 컨트롤 버튼 -->
+        <div class="controls-section">
+            <div class="controls-container">
+                <button id="next-word" class="control-btn primary">다음 단어</button>
+                <button id="reset" class="control-btn secondary">다시 시작</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 성공 알림창 -->
+    <div id="success-notification" class="success-notification">
+        <div class="emoji">🎉</div>
+        <div class="message">성공했습니다!</div>
+    </div>
+    
+    <!-- 오타 알림창 -->
+    <div id="error-notification" class="error-notification">
+        <div class="emoji">❌</div>
+        <div class="message">잘못된 키입니다!</div>
+        <div class="hint">백스페이스로 수정하세요</div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
