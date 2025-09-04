@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타자 연습 - 천지인 키보드</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="main-page">
+        <div class="main-container">
+            <header class="main-header">
+                <h1 class="main-title">타자 연습</h1>
+                <h2 class="main-subtitle">천지인 키보드로 한글을 연습해보세요</h2>
+            </header>
+            
+            <main class="main-content">
+                <div class="steps-grid">
+                    <div class="step-card" onclick="handleStepClick(1)">
+                        <h3 class="step-title">1단계</h3>
+                        <p class="step-subtitle">왕초보 첫걸음</p>
+                    </div>
+                    <div class="step-card" onclick="handleStepClick(2)">
+                        <h3 class="step-title">2단계</h3>
+                        <p class="step-subtitle">이젠 나도 낱말 타자</p>
+                    </div>
+                    <div class="step-card" onclick="handleStepClick(3)">
+                        <h3 class="step-title">3단계</h3>
+                        <p class="step-subtitle">척척박사 생활 단어</p>
+                    </div>
+                    <div class="step-card" onclick="handleStepClick(4)">
+                        <h3 class="step-title">4단계</h3>
+                        <p class="step-subtitle">자신 있게 짧은 문장</p>
+                    </div>
+                    <div class="step-card" onclick="handleStepClick(5)">
+                        <h3 class="step-title">5단계</h3>
+                        <p class="step-subtitle">문자 보내기 대성공!</p>
+                    </div>
+                </div>
+            </main>
+            
+            <footer class="main-footer">
+                <p class="footer-text">어르신들을 위한 천지인 키보드 타자 연습</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function handleStepClick(stepId) {
+            // 새 페이지로 이동 (target="_blank" 없이 현재 창에서)
+            window.location.href = `step${stepId}.html`;
+        }
+    </script>
+</body>
+</html>

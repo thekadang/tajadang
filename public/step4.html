@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4단계 - 자신 있게 짧은 문장</title>
+    <link rel="stylesheet" href="step.css">
+</head>
+<body>
+    <div class="app">
+        <header class="practice-header" style="background-color: #D0021B;">
+            <div class="step-info">
+                <h2 class="step-page-title">4단계</h2>
+                <h3 class="step-page-subtitle">자신 있게 짧은 문장</h3>
+                <div class="level-info">
+                    <span class="level-text">레벨 <span id="current-level">1</span></span>
+                    <span class="keytime-text">키타임: <span id="current-keytime">30</span>초</span>
+                    <span class="success-text">연속성공: <span id="consecutive-success">0</span>/10</span>
+                </div>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="word-section">
+                <div class="word-display">
+                    <h2 id="current-word">로딩 중...</h2>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="input-field" readonly>
+                </div>
+                <div class="hint-container">
+                    <div id="hint-text">키보드를 눌러주세요</div>
+                </div>
+            </div>
+        </main>
+
+        <div class="keyboard-section">
+            <div class="keyboard">
+                <div class="key-row">
+                    <button class="key" data-key="1">1</button>
+                    <button class="key" data-key="2">2</button>
+                    <button class="key" data-key="3">3</button>
+                    <button class="key" data-key="4">4</button>
+                    <button class="key" data-key="5">5</button>
+                </div>
+                <div class="key-row">
+                    <button class="key" data-key="6">6</button>
+                    <button class="key" data-key="7">7</button>
+                    <button class="key" data-key="8">8</button>
+                    <button class="key" data-key="9">9</button>
+                    <button class="key" data-key="0">0</button>
+                </div>
+                <div class="key-row">
+                    <button class="key" data-key="*">*</button>
+                    <button class="key" data-key="#">#</button>
+                </div>
+                <div class="key-row">
+                    <button class="key control" data-action="backspace">지우기</button>
+                    <button class="key control" data-action="enter">확인</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="controls-container">
+                <button id="next-word" class="control-btn primary">다른단어</button>
+                <button id="go-main" class="control-btn secondary">첫 화면으로</button>
+            </div>
+        </div>
+
+        <!-- 알림창 -->
+        <div id="success-notification" class="notification success-notification" style="display: none;">
+            <div class="notification-content">
+                <h3 id="success-message">성공했습니다!</h3>
+            </div>
+        </div>
+
+        <div id="error-notification" class="notification error-notification" style="display: none;">
+            <div class="notification-content">
+                <h3 id="error-message">오류 메시지</h3>
+            </div>
+        </div>
+
+        <!-- 레벨업 알림 -->
+        <div id="levelup-notification" class="levelup-notification" style="display: none;">
+            <div class="levelup-content">
+                <h3>레벨업!</h3>
+                <p>좀더 높은 수준으로 갈께요</p>
+            </div>
+        </div>
+
+        <!-- 단계 완료 알림 -->
+        <div id="stage-complete-notification" class="stage-complete-notification" style="display: none;">
+            <div class="stage-complete-content">
+                <h3>축하합니다!</h3>
+                <p>다음 단계에 도전하세요.</p>
+                <div class="challenge-buttons">
+                    <button id="challenge-btn" class="challenge-btn">도전</button>
+                    <button id="retry-btn" class="retry-btn">다시연습</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="step.js"></script>
+    <script>
+        // 4단계 데이터 설정
+        window.stepId = 4;
+        window.stepData = {
+            title: '4단계',
+            subtitle: '자신 있게 짧은 문장',
+            color: '#D0021B'
+        };
+    </script>
+</body>
+</html>

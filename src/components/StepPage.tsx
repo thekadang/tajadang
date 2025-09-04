@@ -25,7 +25,15 @@ const StepPage: React.FC = () => {
     successMessage,
     onKeyClick,
     onNextWord,
-    onReset
+    onReset,
+    // 레벨 시스템 관련
+    currentLevel,
+    consecutiveSuccess,
+    currentKeyTime,
+    showLevelUpNotification,
+    showStageCompleteNotification,
+    onChallengeNextStage,
+    onRetryStage
   } = useCheonjiinKeyboard(stepNumber);
 
   const stepInfo = {
@@ -49,6 +57,11 @@ const StepPage: React.FC = () => {
           <div className="step-info">
             <h2 className="step-page-title">{currentStepInfo.title}</h2>
             <h3 className="step-page-subtitle">{currentStepInfo.subtitle}</h3>
+            <div className="level-info">
+              <span className="level-text">레벨 {currentLevel}</span>
+              <span className="keytime-text">키타임: {currentKeyTime / 1000}초</span>
+              <span className="success-text">연속성공: {consecutiveSuccess}/10</span>
+            </div>
           </div>
         </header>
         
@@ -85,6 +98,42 @@ const StepPage: React.FC = () => {
           errorMessage={errorMessage}
           currentStep={currentStep}
         />
+
+        {/* 레벨업 알림 */}
+        {showLevelUpNotification && (
+          <div className="levelup-notification">
+            <div className="levelup-content">
+              <h3>레벨업!</h3>
+              <p>좀더 높은 수준으로 갈께요</p>
+            </div>
+          </div>
+        )}
+
+        {/* 단계 완료 알림 */}
+        {showStageCompleteNotification && (
+          <div className="stage-complete-notification">
+            <div className="stage-complete-content">
+              <h3>축하합니다!</h3>
+              <p>다음 단계에 도전하세요.</p>
+              <div className="challenge-buttons">
+                {stepNumber < 5 && (
+                  <button 
+                    className="challenge-btn"
+                    onClick={onChallengeNextStage}
+                  >
+                    도전
+                  </button>
+                )}
+                <button 
+                  className="retry-btn"
+                  onClick={onRetryStage}
+                >
+                  다시연습
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
