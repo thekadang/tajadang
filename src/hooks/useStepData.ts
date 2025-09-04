@@ -1,4 +1,12 @@
+/**
+ * 단계별 데이터 관리 훅
+ * 
+ * 천지인 키보드 타자연습의 각 단계별 학습 데이터를 관리합니다.
+ * 단어 목록, 키 매핑, 단계 정보 등을 제공합니다.
+ */
+
 import { useMemo } from 'react';
+import { CheonjiinMapping } from '../types';
 
 // 단계별 데이터 구조
 export interface StepData {
@@ -7,12 +15,7 @@ export interface StepData {
   subtitle: string;
   description: string;
   words: string[];
-  mapping: Record<string, Array<{
-    key: string;
-    number: number;
-    keyDisplay: string;
-    result: string;
-  }>>;
+  mapping: CheonjiinMapping;
 }
 
 // 단계별 데이터 정의

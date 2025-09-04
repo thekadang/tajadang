@@ -8,7 +8,7 @@ interface ControlsProps {
 
 const Controls: React.FC<ControlsProps> = ({ onNextWord, onReset }) => {
   const navigate = useNavigate();
-
+  
   const handleGoToMain = () => {
     navigate('/');
   };
@@ -17,14 +17,14 @@ const Controls: React.FC<ControlsProps> = ({ onNextWord, onReset }) => {
     <div className="controls-section">
       <div className="controls-container">
         <button 
-          id="next-word" 
+          id="next-word"
           className="control-btn primary"
           onClick={onNextWord}
         >
           다른단어
         </button>
         <button 
-          id="reset" 
+          id="reset"
           className="control-btn secondary"
           onClick={handleGoToMain}
         >

@@ -1,5 +1,11 @@
 import React from 'react';
 
+interface PressInfo {
+  total: number;
+  remaining: number;
+  isConsecutive: boolean;
+}
+
 interface CurrentStep {
   key: string;
   number: number;
@@ -15,100 +21,73 @@ interface NotificationProps {
   currentStep: CurrentStep | null;
 }
 
+const TIMEOUT_MESSAGE = '시간이 다 되었어요. 다시 해보세요!';
+
+const getRandomEmoji = (type: 'success' | 'error' | 'timeout') => {
+  const emojis = {
+    success: ['🎉', '👏', '✨', '🌟', '💫', '🎊', '🥳', '😊'],
+    error: ['😅', '🤔', '😊', '💪', '🎯', '📝', '✍️'],
+    timeout: ['⏰', '⏱️', '🕐', '⏳', '⌛', '🔔']
+  };
+  
+  const emojiList = emojis[type];
+  return emojiList[Math.floor(Math.random() * emojiList.length)];
+};
+
+const getRandomErrorMessage = () => {
+  const messages = [
+    '다시 한번 해보세요!',
+    '천천히 정확하게!',
+    '조금만 더 신경써서!',
+    '거의 다 왔어요!',
+    '다시 도전해보세요!',
+    '실수는 괜찮아요!'
+  ];
+  return messages[Math.floor(Math.random() * messages.length)];
+};
+
 const Notification: React.FC<NotificationProps> = ({ 
   showSuccess, 
   showError, 
   successMessage, 
-  errorMessage,
+  errorMessage, 
   currentStep 
 }) => {
-  const getSuccessEmoji = () => {
-    const emojis = ['🎉', '✨', '🌟', '💫', '🎊', '🏆', '👏', '🎯'];
-    return emojis[Math.floor(Math.random() * emojis.length)];
-  };
-
-  const isTimeoutMessage = errorMessage === '시간이 다 되었어요. 다시 해보세요!';
+  const isTimeoutMessage = errorMessage === TIMEOUT_MESSAGE;
   
   const getErrorMessage = () => {
-    // 시간 초과 메시지인 경우 그대로 사용
-    if (isTimeoutMessage) {
-      return errorMessage;
-    }
-    
-    // 오타 메시지인 경우에만 랜덤 메시지 사용
-    const messages = [
-      '다른 키예요!',
-      '틀렸어요!',
-      '오타 발생!',
-      '실수했어요!',
-      '다시 해보세요!',
-      '주의하세요!'
-    ];
-    return messages[Math.floor(Math.random() * messages.length)];
-  };
-  
-  const getTimeoutEmoji = () => {
-    const emojis = ['⏰', '⏱️', '⌛', '🕐', '🔔', '⚡'];
-    return emojis[Math.floor(Math.random() * emojis.length)];
-  };
-  
-  const getErrorEmoji = () => {
-    const emojis = ['❌', '⚠️', '🚫', '💥', '🔥', '⚡'];
-    return emojis[Math.floor(Math.random() * emojis.length)];
+    return isTimeoutMessage ? errorMessage : getRandomErrorMessage();
   };
 
   if (showSuccess) {
     return (
-      <div id="success-notification" className="success-notification show animate">
-        <div className="emoji">{getSuccessEmoji()}</div>
+      <div className={`success-notification ${showSuccess ? 'show' : ''}`} id="success-notification">
+        <span className="emoji">{getRandomEmoji('success')}</span>
         <div className="message">{successMessage}</div>
       </div>
     );
   }
 
   if (showError) {
-    // 시간 초과 메시지인 경우
     if (isTimeoutMessage) {
       return (
-        <div id="error-notification" className="error-notification show animate timeout-notification">
-          <div className="emoji">{getTimeoutEmoji()}</div>
+        <div className={`timeout-notification ${showError ? 'show' : ''}`} id="error-notification">
+          <span className="emoji">{getRandomEmoji('timeout')}</span>
           <div className="message">{getErrorMessage()}</div>
-          <div className="timeout-hint">시간이 초과되었습니다</div>
+          <div className="hint">시간이 초과되었습니다</div>
         </div>
       );
     }
-    
-    // 오타 메시지인 경우 (currentStep이 있을 때만)
+
     if (currentStep) {
       return (
-        <div id="error-notification" className="error-notification show animate">
-          <div className="emoji">{getErrorEmoji()}</div>
+        <div className={`error-notification ${showError ? 'show' : ''}`} id="error-notification">
+          <span className="emoji">{getRandomEmoji('error')}</span>
           <div className="message">{getErrorMessage()}</div>
           <div className="hint">
-            <div style={{ display: 'inline-block', margin: '0 12px', verticalAlign: 'middle' }}>
-              <div 
-                className="hint-icon" 
-                style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  color: 'white',
-                  width: '70px',
-                  height: '70px',
-                  borderRadius: '16px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 6px 16px rgba(102, 126, 234, 0.4)',
-                  border: '3px solid #fff'
-                }}
-              >
-                <div className="hint-symbol" style={{ fontSize: '22px', fontWeight: 'bold', lineHeight: 1 }}>
-                  {currentStep.keyDisplay}
-                </div>
-                <div className="hint-number" style={{ fontSize: '16px', opacity: 0.8, lineHeight: 1 }}>
-                  {currentStep.number}
-                </div>
-              </div>
+            <div className="hint-icon">
+              <div className="hint-symbol">{currentStep.keyDisplay}</div>
+              <div className="hint-number">{currentStep.number}</div>
             </div>
             이 키를 눌러주세요!
           </div>

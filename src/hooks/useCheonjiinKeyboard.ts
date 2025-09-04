@@ -289,9 +289,9 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
   }, [loadNewWord]);
 
   // 초기 단어 로드
-  useState(() => {
+  useEffect(() => {
     loadNewWord();
-  });
+  }, [loadNewWord]);
 
   return {
     currentWord,
