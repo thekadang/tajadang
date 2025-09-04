@@ -45,10 +45,10 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
         setCurrentInput('');
         setConsecutiveSuccess(0);
         setShowErrorNotification(true);
-        setErrorMessage('시간이 초과되었습니다. 다시 시도해주세요.');
+        setErrorMessage('시간이 다 되었어요. 다시 해보세요!');
         setTimeout(() => {
           setShowErrorNotification(false);
-        }, 1000);
+        }, 2000); // 시간 초과는 2초 표시
       }, currentKeyTime);
     }
   }, [currentLevel, currentKeyTime]);
@@ -115,10 +115,10 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
       setCurrentInput('');
       setConsecutiveSuccess(0);
       setShowErrorNotification(true);
-      setErrorMessage('시간이 초과되었습니다. 다시 시도해주세요.');
+      setErrorMessage('시간이 다 되었어요. 다시 해보세요!');
       setTimeout(() => {
         setShowErrorNotification(false);
-      }, 1000);
+      }, 2000); // 시간 초과는 2초 표시
     }, currentKeyTime);
   }, [currentKeyTime]);
 
@@ -174,7 +174,7 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
       // 잘못된 키 입력 - 연속 성공 카운터 리셋
       setConsecutiveSuccess(0);
       setShowErrorNotification(true);
-      setErrorMessage(`잘못된 키입니다. ${currentStep?.keyDisplay || ''} 키를 눌러주세요.`);
+      setErrorMessage(`다른 키예요. ${currentStep?.keyDisplay || currentStep?.key} 키를 눌러보세요!`);
       setTimeout(() => {
         setShowErrorNotification(false);
       }, 1000);

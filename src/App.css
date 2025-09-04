@@ -1357,3 +1357,17 @@ body {
         color: #667eea;
     }
 }
+
+/* 시간 초과 알림창 */
+.timeout-notification {
+  background: rgba(255, 152, 0, 0.95) !important;
+  border: 3px solid #FF9800;
+}
+
+.timeout-hint {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: white;
+  opacity: 0.9;
+  font-weight: 300;
+}
