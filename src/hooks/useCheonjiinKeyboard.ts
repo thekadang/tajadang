@@ -2,9 +2,9 @@ import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { useStepData } from './useStepData';
 
 export const useCheonjiinKeyboard = (stepId: number = 4) => {
-  const stepData = useStepData(stepId);
-  const cheonjiinMapping = stepData.mapping;
-  const practiceWords = stepData.words;
+  const stepDataHook = useStepData(stepId);
+  const cheonjiinMapping = stepDataHook.mapping;
+  const practiceWords = stepDataHook.currentWords;
   const [currentWord, setCurrentWord] = useState('');
   const [currentInput, setCurrentInput] = useState('');
   const [currentInputIndex, setCurrentInputIndex] = useState(0);
@@ -314,6 +314,8 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
     showLevelUpNotification,
     showStageCompleteNotification,
     onChallengeNextStage,
-    onRetryStage
+    onRetryStage,
+    // 새로운 단계 데이터 훅
+    stepDataHook
   };
 };

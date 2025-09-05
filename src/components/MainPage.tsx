@@ -41,6 +41,10 @@ const MainPage: React.FC = () => {
     navigate(`/step/${stepId}`);
   };
 
+  const handleDataManagerClick = () => {
+    navigate('/admin');
+  };
+
   return (
     <div className="main-page">
       <div className="main-container">
@@ -67,6 +71,12 @@ const MainPage: React.FC = () => {
         </div>
 
         <div className="main-footer">
+          <button 
+            className="data-manager-button"
+            onClick={handleDataManagerClick}
+          >
+            📊 데이터 관리
+          </button>
           <p className="footer-text">
             천천히 따라하시면 누구나 할 수 있습니다
           </p>

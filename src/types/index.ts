@@ -46,6 +46,36 @@ export interface CheonjiinMapping {
 }
 
 /**
+ * 레벨별 데이터
+ * 각 레벨별로 연습할 단어와 설명을 포함합니다.
+ */
+export interface LevelData {
+  /** 해당 레벨에서 연습할 단어들 */
+  words: string[];
+  /** 레벨 설명 */
+  description: string;
+}
+
+/**
+ * 단계별 데이터
+ * 각 단계의 모든 정보를 포함합니다.
+ */
+export interface StepData {
+  /** 단계 ID (1-5) */
+  id: number;
+  /** 단계 제목 */
+  title: string;
+  /** 단계 부제목 */
+  subtitle: string;
+  /** 단계 설명 */
+  description: string;
+  /** 레벨별 데이터 (1-5) */
+  levels: Record<number, LevelData>;
+  /** 키 매핑 정보 */
+  mapping: CheonjiinMapping;
+}
+
+/**
  * 단계별 기본 정보
  * 메인 페이지에서 단계 선택 시 사용됩니다.
  */
