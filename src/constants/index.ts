@@ -18,8 +18,8 @@ export const LEVEL_UP_REQUIRED_SUCCESS = 10;
 
 // 알림 표시 시간 (밀리초)
 export const NOTIFICATION_DURATION = {
-  SUCCESS: 2000,
-  ERROR: 1000,
+  SUCCESS: 1500,
+  ERROR: 2500,
   TIMEOUT: 2000
 };
 

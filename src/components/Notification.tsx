@@ -1,11 +1,5 @@
 import React from 'react';
 
-interface PressInfo {
-  total: number;
-  remaining: number;
-  isConsecutive: boolean;
-}
-
 interface CurrentStep {
   key: string;
   number: number;
@@ -84,12 +78,12 @@ const Notification: React.FC<NotificationProps> = ({
         <div className={`error-notification ${showError ? 'show' : ''}`} id="error-notification">
           <span className="emoji">{getRandomEmoji('error')}</span>
           <div className="message">{getErrorMessage()}</div>
-          <div className="hint">
+          <div className="hint-section">
             <div className="hint-icon">
               <div className="hint-symbol">{currentStep.keyDisplay}</div>
               <div className="hint-number">{currentStep.number}</div>
             </div>
-            이 키를 눌러주세요!
+            <div className="hint-text">이 키를 눌러주세요!</div>
           </div>
         </div>
       );

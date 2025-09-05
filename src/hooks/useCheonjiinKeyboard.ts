@@ -177,7 +177,7 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
       setErrorMessage(`다른 키예요. ${currentStep?.keyDisplay || currentStep?.key} 키를 눌러보세요!`);
       setTimeout(() => {
         setShowErrorNotification(false);
-      }, 1000);
+      }, 2500);
       return;
     }
 
@@ -252,7 +252,7 @@ export const useCheonjiinKeyboard = (stepId: number = 4) => {
           setShowLevelUpNotification(false);
           setShowStageCompleteNotification(false);
           loadNewWord(); // 성공 알림이 사라지면 자동으로 다음 단어 로드
-        }, 2000);
+        }, 1500);
       }
     } else {
       // 아직 같은 키를 더 눌러야 함 - 중간 결과 표시
