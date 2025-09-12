@@ -9,7 +9,6 @@
 - [기술 스택](#-기술-스택)
 - [프로젝트 구조](#-프로젝트-구조)
 - [설치 및 실행](#-설치-및-실행)
-- [관리자 설정](#-관리자-설정)
 - [개발 가이드](#-개발-가이드)
 - [컴포넌트 구조](#-컴포넌트-구조)
 - [상태 관리](#-상태-관리)
@@ -32,11 +31,13 @@
 ### 🎮 학습 기능
 - **단계별 학습 시스템**: 5단계로 나뉜 체계적인 학습 과정
 - **실시간 피드백**: 키 입력에 대한 즉각적인 성공/실패 알림
+- **키타임 오버 알림**: 시간 초과 시 오렌지색 경고 알림으로 집중력 향상
 - **시각적 가이드**: 눌러야 할 키와 횟수를 시각적으로 표시
 - **진도 추적**: 현재 입력 상태와 완료도 실시간 표시
 
 ### 🏆 레벨 시스템
 - **5단계 난이도**: 30초 → 15초 → 10초 → 5초 → 1초
+- **키타임 시스템**: 키를 누를 때마다 타이머 초기화 후 재시작
 - **자동 레벨업**: 연속 10회 성공 시 자동 레벨 상승
 - **단계 완료 시스템**: 각 단계 완료 후 다음 단계 도전 가능
 
@@ -76,6 +77,7 @@ tajaproject/
 │   │   ├── Controls/          # 컨트롤 버튼
 │   │   │   ├── Controls.tsx
 │   │   │   └── ControlsStyles.ts
+│   │   ├── Header.tsx         # 헤더 컴포넌트
 │   │   ├── HintSection/       # 힌트 표시
 │   │   │   ├── HintSection.tsx
 │   │   │   └── HintSectionStyles.ts
@@ -105,7 +107,9 @@ tajaproject/
 │   ├── types/                 # TypeScript 타입 정의
 │   │   └── index.ts
 │   ├── utils/                 # 유틸리티 함수
-│   │   └── index.ts
+│   │   ├── index.ts
+│   │   ├── localFileManager.ts
+│   │   └── stepFileManager.ts
 │   ├── App.css               # 전역 스타일
 │   ├── App.tsx               # 메인 앱 컴포넌트
 │   ├── index.css             # 기본 스타일
@@ -144,36 +148,6 @@ npm start
 ```
 브라우저에서 `http://localhost:3000` 접속
 
-## 🔐 관리자 설정
-
-### 환경변수 설정
-관리자 계정 정보는 환경변수로 관리됩니다. 보안을 위해 `.env.local` 파일을 생성하여 설정하세요.
-
-```bash
-# .env.local 파일 생성
-cp .env.example .env.local
-```
-
-`.env.local` 파일을 편집하여 관리자 정보를 설정:
-```bash
-REACT_APP_ADMIN_USERNAME=your_admin_username
-REACT_APP_ADMIN_PASSWORD=your_secure_password
-```
-
-### 관리자 페이지 접근
-- URL: `http://localhost:3000/admin`
-- 기본 계정: `admin` / `admin123` (환경변수로 변경 가능)
-- 세션 유지시간: 30분
-
-### 데이터 관리 기능
-- **데이터 추가**: 단계별/레벨별로 새로운 연습 단어 추가
-- **데이터 삭제**: 레벨별 삭제 또는 검색을 통한 삭제
-- **키패드 참고**: 입력 시 참고할 수 있는 시각적 키패드 제공
-
-### 보안 주의사항
-- `.env.local` 파일은 깃허브에 업로드되지 않습니다
-- 실제 운영 환경에서는 강력한 비밀번호를 사용하세요
-- 관리자 계정 정보를 주기적으로 변경하세요
 
 ### 빌드
 ```bash
@@ -213,10 +187,10 @@ chore: 빌드 업무 수정, 패키지 매니저 수정
 ### 기능 컴포넌트
 - **WordDisplay**: 연습할 단어 표시
 - **InputField**: 사용자 입력 표시
-- **HintSection**: 키 입력 가이드
-- **Keyboard**: 가상 천지인 키보드
+- **HintSection**: 키 입력 가이드 및 현재 키 표시
+- **Keyboard**: 가상 천지인 키보드 (스페이스바 포함)
 - **Controls**: 컨트롤 버튼 (다음 단어, 메인으로)
-- **Notification**: 성공/실패 알림
+- **Notification**: 성공/실패/키타임 오버 알림
 
 ### 공통 컴포넌트 (Styled Components)
 - **Button**: 재사용 가능한 버튼
@@ -241,7 +215,8 @@ const {
   
   // 알림 시스템
   showSuccessNotification,  // 성공 알림 표시
-  showErrorNotification,    // 실패 알림 표시
+  showErrorNotification,    // 실패/키타임 오버 알림 표시
+  errorMessage,             // 에러 메시지 내용
   
   // 이벤트 핸들러
   onKeyClick,            // 키 클릭 처리
@@ -326,11 +301,10 @@ npm run build
 - **Vercel**: React 앱 최적화
 - **GitHub Pages**: 무료 호스팅
 
-### 환경 변수
+### 환경 변수 (선택사항)
 ```bash
-# .env 파일 생성
+# .env 파일 생성 (필요 시)
 REACT_APP_VERSION=1.0.0
-REACT_APP_API_URL=https://api.example.com
 ```
 
 ## 🐛 문제 해결
