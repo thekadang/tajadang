@@ -172,10 +172,9 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyClick, targetKey, pressInfo })
               <span className="key-number">0</span>
             </div>
             <div 
-              className="key space" 
+              className={getKeyClass(' ')} 
               data-key=" "
-              data-action="space"
-              onClick={() => onKeyClick(' ', 'space')}
+              onClick={() => onKeyClick(' ')}
             >
               <span className="key-sub">[____]</span>
             </div>

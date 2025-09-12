@@ -77,6 +77,7 @@ export const step5Data: StepData = {
       { key: '|', number: 1, keyDisplay: '|', result: '좋이' },
       { key: '.', number: 2, keyDisplay: '.', result: '좋아' },
       { key: 'ㄴ', number: 5, keyDisplay: 'ㄴㄹ', result: '좋은' },
+      { key: ' ', number: null, keyDisplay: '[____]', result: '좋은 ' },
       { key: 'ㅇ', number: 0, keyDisplay: 'ㅇㅁ', result: '좋은 ㅇ' },
       { key: '|', number: 1, keyDisplay: '|', result: '좋은 이' },
       { key: '.', number: 2, keyDisplay: '.', result: '좋은 아' },
